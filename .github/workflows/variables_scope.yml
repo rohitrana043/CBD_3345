@@ -16,6 +16,6 @@ jobs:
       - run: bats -v
         env:
             MY_STEP_VARIABLE: 'This is a step flow variable'
-      - run: echo "$MY_WORKFLOW_VARIABLE"
+      - run: echo ${{MY_WORKFLOW_VARIABLE}}
       - run: echo "$MY_JOB_VARIABLE"
       - run: echo "$MY_STEP_VARIABLE"
