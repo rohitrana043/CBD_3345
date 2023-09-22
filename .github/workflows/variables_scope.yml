@@ -1,5 +1,6 @@
-name: variables_scope
-on: [push]
+name: Greeting on variable day
+on:
+  workflow_dispatch
 env:
     MY_WORKFLOW_VARIABLE: "This is a work flow variable"
 jobs:
@@ -9,16 +10,9 @@ jobs:
         MY_JOB_VARIABLE: 'This is a job flow variable'
     steps:
       - name: 'step1'
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: |
-            bats -v
+        run: |
+            echo ${{env.MY_WORKFLOW_VARIABLE}}
+            echo "$MY_JOB_VARIABLE"
             echo "$MY_STEP_VARIABLE"
         env:
             MY_STEP_VARIABLE: 'This is a step flow variable'
-      - run: echo ${{env.MY_WORKFLOW_VARIABLE}}
-      - run: echo "$MY_JOB_VARIABLE"
-      - run: echo "$MY_STEP_VARIABLE"
