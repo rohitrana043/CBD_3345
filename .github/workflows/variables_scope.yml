@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: '14'
       - run: npm install -g bats
-      - run: bats -v \n echo "$MY_STEP_VARIABLE"
+      - run: |
+            bats -v
+            echo "$MY_STEP_VARIABLE"
         env:
             MY_STEP_VARIABLE: 'This is a step flow variable'
       - run: echo ${{env.MY_WORKFLOW_VARIABLE}}
