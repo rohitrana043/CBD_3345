@@ -1,0 +1,21 @@
+name: variables_scope
+on: [push]
+env:
+    MY_WORKFLOW_VARIABLE: "This is a work flow variable"
+jobs:
+  check-variable-scope:
+    runs-on: ubuntu-latest
+    env:
+        MY_JOB_VARIABLE: 'This is a job flow variable'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
+        env:
+            MY_STEP_VARIABLE: 'This is a step flow variable'
+      - run: echo "$MY_WORKFLOW_VARIABLE"
+      - run: echo "$MY_JOB_VARIABLE"
+      - run: echo "$MY_STEP_VARIABLE"
