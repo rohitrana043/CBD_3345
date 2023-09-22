@@ -8,14 +8,15 @@ jobs:
     env:
         MY_JOB_VARIABLE: 'This is a job flow variable'
     steps:
-      - uses: actions/checkout@v4
+      - name: 'step1'
+        uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
       - run: npm install -g bats
-      - run: bats -v
+      - run: bats -v \n echo "$MY_STEP_VARIABLE"
         env:
             MY_STEP_VARIABLE: 'This is a step flow variable'
-      - run: echo ${{MY_WORKFLOW_VARIABLE}}
+      - run: echo ${{env.MY_WORKFLOW_VARIABLE}}
       - run: echo "$MY_JOB_VARIABLE"
       - run: echo "$MY_STEP_VARIABLE"
